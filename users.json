@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "username": "Chick",
+    "name": "Simone",
+    "surname": "Ingenito",
+    "age": 18
+  },
+  {
+    "id": 2,
+    "username": "albeada",
+    "name": "Pio",
+    "surname": "Amato",
+    "age": 18
+  },
+  {
+    "id": 3,
+    "username": "Distructor",
+    "name": "Luca",
+    "surname": "Amato",
+    "age": 18
+  },
+  {
+    "id": 4,
+    "username": "berto",
+    "name": "alberto",
+    "surname": "amato",
+    "age": "20"
+  },
+  {
+    "username": 4,
+    "name": "berto",
+    "surname": "alberto",
+    "age": null
+  }
+]
