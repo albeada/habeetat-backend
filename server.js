@@ -44,7 +44,7 @@ app.delete("/authors/:username", (req, res) => {
    res.json(authorsProvider.removeUser(username));
 });
 
-app.put("/authors", (req, res) => {
+app.post("/authors", (req, res) => {
    const{ id,username, name, surname, age } = req.body;
    res.json(authorsProvider.addUser(id, username, name, surname, age ));
 });
