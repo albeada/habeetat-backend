@@ -37,6 +37,12 @@ app.patch("/authors/:id", (req, res) => {
     res.json(authorsProvider.updateUser(id, username, name, surname, age));
 });
 
+app.put("/authors/:id", (req, res) => {
+   const { id } = req.params;
+   const{ username, name, surname, age } = req.body;
+    res.json(authorsProvider.updateUser(id, username, name, surname, age));
+});
+
 
 //delete usato per cancelare un autore
 app.delete("/authors/:username", (req, res) => {

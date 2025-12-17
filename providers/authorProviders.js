@@ -21,6 +21,7 @@ function removeUser(username){
     const users= getAllUsers();
     let user2 = users.filter(users => users.username !== username);
     saveUser(user2);
+    return user2;
 }
 
 
@@ -62,3 +63,4 @@ module.exports={
     updateUser,
     addUser
 }
+
