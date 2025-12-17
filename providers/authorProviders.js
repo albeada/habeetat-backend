@@ -8,7 +8,8 @@ function getAllUsers () {
 
 function getUser(username){
     const users= getAllUsers();
-    return users.find(users => users.username === username);
+    let user2 = users.find(users => users.username === username);
+    return user2;
 }
 
 function getUserbyId(id){
@@ -26,29 +27,31 @@ function removeUser(username){
 
 
 function updateUser(id, username, name, surname, age){
-    //const {username, name, surname, age} = user;
-    let user = getUserbyId(id);
+    let users = getAllUsers();
+    const index = users.findIndex(el => el.id === parseInt(id));
 
-    user = {
-        "id": parseInt(id, 10),
-        "username": username ? username : user.username,
-        "name": name ? name : user.name,
-        "surname": surname ? surname : user.surname,
-        "age": age ? age : user.age
-    }
+    if (index !== -1) {
+        users[index] = {
+            "id": parseInt(id, 10),
+            "username": username ? username : users[index].username,
+            "name": name ? name : users[index].name,
+            "surname": surname ? surname : users[index].surname,
+            "age": age ? age : users[index].age
+        };
+}
 
-    saveUser(user);
-    return user;
+    saveUser(users);
+    return users[index];
 }
 
 function saveUser(users){
-    fs.writeFileSync('users.json', JSON.stringify(users, null, 2), 'utf8');
+    fs.writeFileSync('./providers/users.json', JSON.stringify(users, null, 2), 'utf8');
 }
 
-function addUser(username, name, surname, age){
+function addUser(id,username, name, surname, age){
     const users = getAllUsers();
     if(getUser(username) == undefined){
-        let user = {"username": username, "name": name, "surname": surname, "age": parseInt(age)};
+        let user = {"id": id, "username": username, "name": name, "surname": surname, "age": parseInt(age)};
         users.push(user);
         saveUser(users);
     }

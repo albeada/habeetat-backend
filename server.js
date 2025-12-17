@@ -12,7 +12,10 @@ app.get('/authors', (req, res) => {
 app.get("/authors/:username", (req, res) => {
     const { username } = req.params;
     console.log(username);
-    res.json(authorsProvider.getUser(username));
+    let user = authorsProvider.getUser(username);
+    if(!user)
+        res.status(404).json({"message":"User not found"});
+    res.json(user);
 });
 
 /* prova
@@ -24,22 +27,24 @@ app.get("/authors/:id", (req, res) => {
 */
 
 app.get("/authors", (req, res) => {
-   const { age } = req.query;//querry usato per i filtri
-   console.log(age);
-   res.json(authorsProvider.getAllUsers());
+    const { age } = req.query;//querry usato per i filtri
+    console.log(age);
+    res.json(authorsProvider.getAllUsers()); 
 });
 
 //patch usate per la modifica di un autore specifico
 app.patch("/authors/:id", (req, res) => {
-   const { id } = req.params;
-   const{ username, name, surname, age } = req.body;
-
-    res.json(authorsProvider.updateUser(id, username, name, surname, age));
+    const { id } = req.params;
+    const{ username, name, surname, age } = req.body;
+    let user = authorsProvider.updateUser(id, username, name, surname, age);
+    if(!user)
+        res.status(404).json({"message":"User not found"});
+    res.json(user);
 });
 
 app.put("/authors/:id", (req, res) => {
-   const { id } = req.params;
-   const{ username, name, surname, age } = req.body;
+    const { id } = req.params; 
+    const{ username, name, surname, age } = req.body;
     res.json(authorsProvider.updateUser(id, username, name, surname, age));
 });
 
@@ -52,9 +57,9 @@ app.delete("/authors/:username", (req, res) => {
 
 app.post("/authors", (req, res) => {
    const{ id,username, name, surname, age } = req.body;
-   res.json(authorsProvider.addUser(id, username, name, surname, age ));
+    res.json(authorsProvider.addUser(id, username, name, surname, age ));
 });
 
 app.listen(port, () => {
-    console.log(`Example app listen on port %{port}`);
+    console.log(`Example app listen on port ${port}`);
 });
